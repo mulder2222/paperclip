@@ -396,7 +396,7 @@ export async function testEnvironment(
       // useful headroom without letting slow hangs linger.
       const helloProbeTimeoutSec = Math.max(
         1,
-        asNumber(config.helloProbeTimeoutSec, targetIsSandbox ? 90 : 60),
+        asNumber(config.helloProbeTimeoutSec, 180),
       );
 
       try {
