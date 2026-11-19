@@ -391,9 +391,8 @@ export async function testEnvironment(
       if (variant) args.push("--variant", variant);
       if (extraArgs.length > 0) args.push(...extraArgs);
 
-      // Sandbox bridges still add cold-start and transport overhead, but the
-      // standard-2 Cloudflare tier now probes quickly enough that 90s keeps
-      // useful headroom without letting slow hangs linger.
+      // Some local OpenCode providers need more than a minute to complete
+      // the hello probe; keep a longer default while honoring explicit config.
       const helloProbeTimeoutSec = Math.max(
         1,
         asNumber(config.helloProbeTimeoutSec, 180),
